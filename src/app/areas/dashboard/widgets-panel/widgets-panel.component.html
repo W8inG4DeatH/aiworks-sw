@@ -1,7 +1,10 @@
 <div class="content-container" fxLayout="column" fxLayoutAlign="start">
 
-  <div fxLayout="row" fxLayoutAlign="center">
-    NEST.JS
+  <div (click)="onTranslate()" class="translate-button" fxLayout="row" fxLayoutAlign="center">
+    TRANSLATE
   </div>
-
+  <hr>
+  <div>
+    {{translatedJson | json}}
+  </div>
 </div>
