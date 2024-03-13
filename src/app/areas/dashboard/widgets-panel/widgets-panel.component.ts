@@ -18,7 +18,7 @@ export class WidgetsPanelComponent implements OnInit {
 
   async onTranslate() {
     try {
-      const targetLanguage = 'sk-SK'; // target language
+      const targetLanguage = 'de-DE'; // target language
       console.log('targetLanguage:', targetLanguage);
       // Load the JSON file from assets
       const textToTranslate = await this.translateService.translateJson(targetLanguage);
