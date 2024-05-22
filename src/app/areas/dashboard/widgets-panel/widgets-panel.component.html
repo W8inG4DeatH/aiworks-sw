@@ -1,13 +1,25 @@
 <div class="content-container" fxLayout="column" fxLayoutAlign="start">
-    <div (click)="onAIModificationFiles()" class="translate-button" fxLayout="row" fxLayoutAlign="center">
-        [ CLICK TO MODIFY FILES WITH AI ]
+    <div (click)="onAIModificationFiles()" class="translate-button" fxLayout="row">
+        <div>[ CLICK TO MODIFY FILES WITH AI ]</div>
+        <div>&nbsp;-&nbsp;</div>
+        <div>Progress: {{ progress?.completed }} / {{ progress?.total }}</div>
+    </div>
+    <hr />
+    <div>
+        <h1>Prompt:</h1>
+        <textarea
+            [(ngModel)]="myAIPrompt"
+            rows="25"
+            placeholder="Enter your AI prompt here"
+            class="full-width"
+        ></textarea>
     </div>
 </div>
 
 <br />
 
 <div class="content-container" fxLayout="column" fxLayoutAlign="start">
-    <div (click)="onTranslate()" class="translate-button" fxLayout="row" fxLayoutAlign="center">
+    <div (click)="onTranslate()" class="translate-button" fxLayout="row">
         [ CLICK TO TRANSLATE ]
     </div>
     <hr />

@@ -17,8 +17,19 @@ export class PostHttpService {
         return this.http.post(apiUrl, { text, targetLanguage }).toPromise();
     }
 
-    sendForAIModificationFiles(pathSegments: string[]) {
+    async sendForAIModificationFiles(pathSegments: string[], myAIPrompt: string): Promise<{ message: string }> {
         const apiUrl = 'http://localhost:3000/aimodify';
-        return this.http.post(apiUrl, { pathSegments }).toPromise();
+        try {
+            const response = await this.http
+                .post<{ message: string }>(apiUrl, { pathSegments, myAIPrompt })
+                .toPromise();
+            if (!response) {
+                throw new Error('No response received from server.');
+            }
+            return response;
+        } catch (error) {
+            console.error('Error sending request to server:', error);
+            throw error;
+        }
     }
 }
