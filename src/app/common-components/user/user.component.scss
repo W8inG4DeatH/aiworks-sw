@@ -7,8 +7,7 @@
         margin-right: 15px;
         height: 100%;
 
-        img
-        {
+        img {
             height: 100%;
             width: auto;
             border-radius: 50%;
@@ -23,8 +22,7 @@
     &.layout-invert {
         .avatar-container {
             margin-right: 15px;
-            img
-            {
+            img {
                 border: 2px solid $white;
             }
         }
@@ -32,5 +30,4 @@
             color: $white;
         }
     }
-
 }

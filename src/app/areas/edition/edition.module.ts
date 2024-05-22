@@ -5,13 +5,7 @@ import { ComixEditorComponent } from 'src/app/areas/edition/comix-editor/comix-e
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    ComixEditorComponent
-  ],
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    FormsModule
-  ]
+    declarations: [ComixEditorComponent],
+    imports: [CommonModule, FlexLayoutModule, FormsModule],
 })
-export class EditionModule { }
+export class EditionModule {}

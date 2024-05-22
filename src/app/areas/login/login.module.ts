@@ -4,15 +4,8 @@ import { NoAccessComponent } from 'src/app/areas/login/no-access/no-access.compo
 import { LoginService } from 'src/app/areas/login/login.service';
 
 @NgModule({
-    declarations: [
-        NoAccessComponent
-    ],
-    imports: [
-        CommonModule
-    ],
-    providers: [
-        LoginService
-    ]
+    declarations: [NoAccessComponent],
+    imports: [CommonModule],
+    providers: [LoginService],
 })
-
-export class LoginModule { }
+export class LoginModule {}

@@ -3,14 +3,14 @@ import { TestBed } from '@angular/core/testing';
 import { AppService } from 'src/app/app.service';
 
 describe('AppService', () => {
-  let service: AppService;
+    let service: AppService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(AppService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(AppService);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 });

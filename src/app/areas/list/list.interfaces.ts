@@ -1,5 +1,4 @@
-export interface IComixItem
-{
+export interface IComixItem {
     SeriesTitle?: string;
     SeriesSubtitle?: string;
     ComixTitle: string;

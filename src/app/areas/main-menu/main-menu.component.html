@@ -1,7 +1,12 @@
 <div class="main-menu-container" fxLayout="column">
-
-    <div *ngFor="let menuElement of mainMenu" routerLink="{{menuElement.RouterLink}}" class="buttons-container" fxLayout="column">
-        <div class="btn blue"><span class="text">{{menuElement.DisplayName}}</span></div>
+    <div
+        *ngFor="let menuElement of mainMenu"
+        routerLink="{{ menuElement.RouterLink }}"
+        class="buttons-container"
+        fxLayout="column"
+    >
+        <div class="btn blue">
+            <span class="text">{{ menuElement.DisplayName }}</span>
+        </div>
     </div>
-
 </div>

@@ -13,17 +13,11 @@ const routes: Routes = [
     { path: 'list', component: ListPanelComponent },
     { path: 'edition', component: ComixEditorComponent, canActivate: [EditionGuardGuard] },
     { path: 'edition/:id', component: ComixEditorComponent, canActivate: [EditionGuardGuard] },
-    { path: 'html-editor', component: HtmlEditorComponent }
+    { path: 'html-editor', component: HtmlEditorComponent },
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(routes),
-        DashboardModule
-    ],
-    exports: [
-        RouterModule
-    ]
+    imports: [RouterModule.forRoot(routes), DashboardModule],
+    exports: [RouterModule],
 })
-
-export class AppRoutingModule { }
+export class AppRoutingModule {}

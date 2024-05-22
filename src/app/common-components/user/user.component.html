@@ -1,6 +1,6 @@
-<div class="user-container" [ngClass]="{'layout-invert': layoutInvert}" fxLayout="row" fxLayoutAlign="start center">
+<div class="user-container" [ngClass]="{ 'layout-invert': layoutInvert }" fxLayout="row" fxLayoutAlign="start center">
     <div *ngIf="user.AvatarBase64" class="avatar-container">
-        <img [src]='user.AvatarBase64' />
+        <img [src]="user.AvatarBase64" />
     </div>
     <div class="name-container">{{ user.DisplayName }}</div>
 </div>

@@ -1,19 +1,30 @@
 <div class="content-container" fxLayout="column" fxLayoutAlign="center">
-
     <div class="header" fxLayout="row" fxFlex>
-
-        <div *ngFor="let columnKey of columnsKeys; let cIndex = index" (click)="OnColumnHeaderClick(columnKey)" class="header-container" fxLayout="row" fxFlex="{{columnsFlex[cIndex]}}">
+        <div
+            *ngFor="let columnKey of columnsKeys; let cIndex = index"
+            (click)="OnColumnHeaderClick(columnKey)"
+            class="header-container"
+            fxLayout="row"
+            fxFlex="{{ columnsFlex[cIndex] }}"
+        >
             {{ columnsNames[cIndex] }}
         </div>
-
     </div>
 
-    <div *ngFor="let item of itemsData; let iIndex = index" (click)="OnItemClick(item)" class="content-item-container" fxLayout="row" fxFlex>
-
-        <div *ngFor="let columnKey of columnsKeys; let cIndex = index" class="content-item" fxLayout="row" fxFlex="{{columnsFlex[cIndex]}}">
+    <div
+        *ngFor="let item of itemsData; let iIndex = index"
+        (click)="OnItemClick(item)"
+        class="content-item-container"
+        fxLayout="row"
+        fxFlex
+    >
+        <div
+            *ngFor="let columnKey of columnsKeys; let cIndex = index"
+            class="content-item"
+            fxLayout="row"
+            fxFlex="{{ columnsFlex[cIndex] }}"
+        >
             {{ item[columnKey] }}
         </div>
-
     </div>
-
 </div>

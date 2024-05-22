@@ -12,27 +12,17 @@ import { MainHeaderComponent } from 'src/app/areas/main-header/main-header.compo
 import { MainMenuComponent } from 'src/app/areas/main-menu/main-menu.component';
 
 @NgModule({
-    declarations:
-        [
-            MainHeaderComponent,
-            MainMenuComponent
-        ],
-    imports:
-        [
-            CommonModule,
-            AppRoutingModule,
-            FlexLayoutModule,
-            CommonComponentsModule,
-            DashboardModule,
-            ListModule,
-            EditionModule,
-            LoginModule
-        ],
-    exports:
-        [
-            MainHeaderComponent,
-            MainMenuComponent
-        ]
+    declarations: [MainHeaderComponent, MainMenuComponent],
+    imports: [
+        CommonModule,
+        AppRoutingModule,
+        FlexLayoutModule,
+        CommonComponentsModule,
+        DashboardModule,
+        ListModule,
+        EditionModule,
+        LoginModule,
+    ],
+    exports: [MainHeaderComponent, MainMenuComponent],
 })
-
-export class AreasModule { }
+export class AreasModule {}

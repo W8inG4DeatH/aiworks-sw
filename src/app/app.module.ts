@@ -12,22 +12,9 @@ import { AreasModule } from 'src/app/areas/areas.module';
 import { AppService } from 'src/app/app.service';
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FlexLayoutModule,
-        CommonComponentsModule,
-        AreasModule
-    ],
-    providers: [
-        AppService
-    ],
-    bootstrap: [
-        AppComponent
-    ]
+    declarations: [AppComponent],
+    imports: [BrowserModule, AppRoutingModule, FlexLayoutModule, CommonComponentsModule, AreasModule],
+    providers: [AppService],
+    bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}

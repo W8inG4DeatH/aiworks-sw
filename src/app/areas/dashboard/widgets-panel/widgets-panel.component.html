@@ -1,17 +1,17 @@
 <div class="content-container" fxLayout="column" fxLayoutAlign="start">
-  <div (click)="onAIModificationFiles()" class="translate-button" fxLayout="row" fxLayoutAlign="center">
-    [ CLICK TO MODIFY FILES WITH AI ]
-  </div>
+    <div (click)="onAIModificationFiles()" class="translate-button" fxLayout="row" fxLayoutAlign="center">
+        [ CLICK TO MODIFY FILES WITH AI ]
+    </div>
 </div>
 
-<br>
+<br />
 
 <div class="content-container" fxLayout="column" fxLayoutAlign="start">
-  <div (click)="onTranslate()" class="translate-button" fxLayout="row" fxLayoutAlign="center">
-    [ CLICK TO TRANSLATE ]
-  </div>
-  <hr>
-  <div>
-    {{translatedJson | json}}
-  </div>
+    <div (click)="onTranslate()" class="translate-button" fxLayout="row" fxLayoutAlign="center">
+        [ CLICK TO TRANSLATE ]
+    </div>
+    <hr />
+    <div>
+        {{ translatedJson | json }}
+    </div>
 </div>

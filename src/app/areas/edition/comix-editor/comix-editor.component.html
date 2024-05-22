@@ -1,78 +1,77 @@
 <div class="content-container" fxLayout="row" fxLayoutAlign="center">
+    <div class="column" fxLayout="column" fxFlex="50">
+        <div class="title">EDYCJA:</div>
 
-  <div class="column" fxLayout="column" fxFlex="50">
+        <form #comixForm="ngForm">
+            <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
+                <label for="seriesTitle">Series Title:</label>
+                <input type="text" id="seriesTitle" name="SeriesTitle" [(ngModel)]="element.SeriesTitle" />
+            </div>
 
-    <div class="title">EDYCJA:</div>
+            <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
+                <label for="seriesSubtitle">Series Subtitle:</label>
+                <input type="text" id="seriesSubtitle" name="SeriesSubtitle" [(ngModel)]="element.SeriesSubtitle" />
+            </div>
 
-    <form #comixForm="ngForm">
+            <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
+                <label for="comixTitle">Comix Title:</label>
+                <input type="text" id="comixTitle" name="ComixTitle" [(ngModel)]="element.ComixTitle" required />
+            </div>
 
-      <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
-        <label for="seriesTitle">Series Title:</label>
-        <input type="text" id="seriesTitle" name="SeriesTitle" [(ngModel)]="element.SeriesTitle">
-      </div>
+            <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
+                <label for="displayName">Display Name:</label>
+                <input type="text" id="displayName" name="DisplayName" [(ngModel)]="element.DisplayName" />
+            </div>
 
-      <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
-        <label for="seriesSubtitle">Series Subtitle:</label>
-        <input type="text" id="seriesSubtitle" name="SeriesSubtitle" [(ngModel)]="element.SeriesSubtitle">
-      </div>
+            <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="Author" [(ngModel)]="element.Author" />
+            </div>
 
-      <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
-        <label for="comixTitle">Comix Title:</label>
-        <input type="text" id="comixTitle" name="ComixTitle" [(ngModel)]="element.ComixTitle" required>
-      </div>
+            <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
+                <label for="publisher">Publisher:</label>
+                <input type="text" id="publisher" name="Publisher" [(ngModel)]="element.Publisher" />
+            </div>
 
-      <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
-        <label for="displayName">Display Name:</label>
-        <input type="text" id="displayName" name="DisplayName" [(ngModel)]="element.DisplayName">
-      </div>
+            <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
+                <label for="publishmentYear">Publishment Year:</label>
+                <input type="text" id="publishmentYear" name="PublishmentYear" [(ngModel)]="element.PublishmentYear" />
+            </div>
 
-      <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
-        <label for="author">Author:</label>
-        <input type="text" id="author" name="Author" [(ngModel)]="element.Author">
-      </div>
+            <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
+                <label for="numberOfPages">Number of Pages:</label>
+                <input
+                    type="number"
+                    min="1"
+                    id="numberOfPages"
+                    name="NumberOfPages"
+                    [(ngModel)]="element.NumberOfPages"
+                />
+            </div>
 
-      <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
-        <label for="publisher">Publisher:</label>
-        <input type="text" id="publisher" name="Publisher" [(ngModel)]="element.Publisher">
-      </div>
+            <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
+                <label for="coverHard">Cover Hard:</label>
+                <input type="checkbox" id="coverHard" name="CoverHard" [(ngModel)]="element.CoverHard" />
+            </div>
 
-      <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
-        <label for="publishmentYear">Publishment Year:</label>
-        <input type="text" id="publishmentYear" name="PublishmentYear" [(ngModel)]="element.PublishmentYear">
-      </div>
+            <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
+                <label for="rating">Rating:</label>
+                <input type="number" min="1" max="10" id="rating" name="Rating" [(ngModel)]="element.Rating" />
+            </div>
 
-      <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
-        <label for="numberOfPages">Number of Pages:</label>
-        <input type="number" min="1" id="numberOfPages" name="NumberOfPages" [(ngModel)]="element.NumberOfPages">
-      </div>
+            <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
+                <label for="collected">Collected:</label>
+                <input type="checkbox" id="collected" name="Collected" [(ngModel)]="element.Collected" />
+            </div>
 
-      <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
-        <label for="coverHard">Cover Hard:</label>
-        <input type="checkbox" id="coverHard" name="CoverHard" [(ngModel)]="element.CoverHard">
-      </div>
+            <div class="buttons-container">
+                <button class="button-container" (ngSubmit)="OnSubmitClick()" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
 
-      <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
-        <label for="rating">Rating:</label>
-        <input type="number" min="1" max="10" id="rating" name="Rating" [(ngModel)]="element.Rating">
-      </div>
-
-      <div class="form-element" fxLayout="column" fxLayoutAlign="start start">
-        <label for="collected">Collected:</label>
-        <input type="checkbox" id="collected" name="Collected" [(ngModel)]="element.Collected">
-      </div>
-
-      <div class="buttons-container">
-        <button class="button-container" (ngSubmit)="OnSubmitClick()" type="submit">Save</button>
-      </div>
-    </form>
-
-  </div>
-
-  <div class="column second-column" fxLayout="column" fxFlex="50">
-
-    <div class="title">Element JSON:</div>
-    <div>{{ element | json }}</div>
-
-  </div>
-
+    <div class="column second-column" fxLayout="column" fxFlex="50">
+        <div class="title">Element JSON:</div>
+        <div>{{ element | json }}</div>
+    </div>
 </div>

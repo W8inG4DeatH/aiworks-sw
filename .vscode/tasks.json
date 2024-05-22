@@ -37,6 +37,16 @@
           }
         }
       }
-    }
+    },
+	{
+		"label": "format all files in src except src/api",
+		"type": "shell",
+		"command": "npx prettier --write 'src/**/*.{ts,html,scss}' '!src/api/**'",
+		"problemMatcher": [],
+		"group": {
+			"kind": "build",
+			"isDefault": true
+		}
+	}
   ]
 }

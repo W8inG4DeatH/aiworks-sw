@@ -1,11 +1,13 @@
 <div fxLayout="row" fxFlex>
-  <div fxLayout="column" fxFlex="50">
-    <div class="buttons-container" fxLayout="row" fxLayoutAlign="start center">
-      <div (click)="OnModeChange()" class="button-container" fxLayout="row" fxLayoutAlign="center center">Mode</div>
+    <div fxLayout="column" fxFlex="50">
+        <div class="buttons-container" fxLayout="row" fxLayoutAlign="start center">
+            <div (click)="OnModeChange()" class="button-container" fxLayout="row" fxLayoutAlign="center center">
+                Mode
+            </div>
+        </div>
+        <textarea (ngModel)="(htmlContent)" rows="50" class="html-editor-area"></textarea>
     </div>
-    <textarea (ngModel)="htmlContent" rows="50" class="html-editor-area"></textarea>
-  </div>
-  <div class="second-column" fxLayout="column" fxFlex="50">
-    <textarea (ngModel)="htmlContent" rows="50" class="html-editor-area"></textarea>
-  </div>
+    <div class="second-column" fxLayout="column" fxFlex="50">
+        <textarea (ngModel)="(htmlContent)" rows="50" class="html-editor-area"></textarea>
+    </div>
 </div>

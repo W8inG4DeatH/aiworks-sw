@@ -6,23 +6,22 @@ import { DebugElement } from '@angular/core';
 import { HtmlEditorComponent } from './html-editor.component';
 
 describe('HtmlEditorComponent', () => {
-  let component: HtmlEditorComponent;
-  let fixture: ComponentFixture<HtmlEditorComponent>;
+    let component: HtmlEditorComponent;
+    let fixture: ComponentFixture<HtmlEditorComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HtmlEditorComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [HtmlEditorComponent],
+        }).compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(HtmlEditorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HtmlEditorComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

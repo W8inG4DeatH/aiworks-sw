@@ -5,16 +5,8 @@ import { ListPanelComponent } from 'src/app/areas/list/list-panel/list-panel.com
 import { ListDataService } from 'src/app/areas/list/list-data.service';
 
 @NgModule({
-    declarations: [
-        ListPanelComponent
-    ],
-    imports: [
-        FlexLayoutModule,
-        CommonModule
-    ],
-    providers: [
-        ListDataService
-    ]
+    declarations: [ListPanelComponent],
+    imports: [FlexLayoutModule, CommonModule],
+    providers: [ListDataService],
 })
-
-export class ListModule { }
+export class ListModule {}

@@ -1,21 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-	selector: 'app-html-editor',
-	templateUrl: './html-editor.component.html',
-	styleUrls: ['./html-editor.component.css']
+    selector: 'app-html-editor',
+    templateUrl: './html-editor.component.html',
+    styleUrls: ['./html-editor.component.css'],
 })
 export class HtmlEditorComponent implements OnInit {
+    public htmlContent: string = '';
 
-	public htmlContent: string = '';
+    constructor() {}
 
-	constructor() { }
+    ngOnInit(): void {}
 
-	ngOnInit(): void {
-	}
-
-	OnModeChange() {
-		console.log('OnModeChange()');
-	}
-
+    OnModeChange() {
+        console.log('OnModeChange()');
+    }
 }
