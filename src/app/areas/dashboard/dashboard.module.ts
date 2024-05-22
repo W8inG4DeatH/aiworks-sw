@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WidgetsPanelComponent } from 'src/app/areas/dashboard/widgets-panel/widgets-panel.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TranslateService } from './widgets-panel/translate.service';
+import { PostHttpService } from 'src/app/api-services/post-http.service';
 
 @NgModule({
   imports: [
@@ -13,7 +13,7 @@ import { TranslateService } from './widgets-panel/translate.service';
     WidgetsPanelComponent
   ],
   providers: [
-    TranslateService
+    PostHttpService
   ]
 })
 export class DashboardModule { }
