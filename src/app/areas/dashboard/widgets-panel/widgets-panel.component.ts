@@ -22,7 +22,7 @@ export class WidgetsPanelComponent implements OnInit {
     5) fxFlex="{{ myVar }}" lub 'flex-{{myVar}}', gdzie myVar to dowolna nazwa zmiennej, zamiana na: 'basis-['myVar'%]'.
     6) fxLayoutAlign="start center" lub 'layout-align-start-center' zamiana na 'justify-start items-center' dla 'flex-row'. Dla 'flex-col' justify i items są zamienione wartościami.
     7) fxLayoutFill lub 'layout-fill' zamiana na: 'w-full h-full'.
-    8) Przykładowy zamiany:
+    8) Przykładowe zamiany:
     a)
     <div class="content-text-container" fxLayout="row" fxLayoutAlign="start center">
     zamiana na:
@@ -32,7 +32,7 @@ export class WidgetsPanelComponent implements OnInit {
     zamiana na:
     <div class="content-text-container flex flex-col items-start justify-between">
 
-    Zwróć tylko zmodyfikowany kod HTML bez żadnych opisów, wyjaśnień oraz formatowania Markdown.
+    Zwróć tylko zmodyfikowany kod HTML bez żadnych opisów, wyjaśnień oraz formatowania Markdown html.
 
     Template:
     `;
