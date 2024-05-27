@@ -4,4 +4,11 @@
     height: 100%;
     padding: 20px;
     border-right: 4px double $field-border;
+
+    .buttons-container {
+        .btn {
+            padding: 5px;
+            line-height: 1.2rem;
+        }
+    }
 }

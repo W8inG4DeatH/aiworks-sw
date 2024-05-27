@@ -1,0 +1,9 @@
+<div class="content-container" fxLayout="column" fxLayoutAlign="start">
+    <div class="header-container full-width" fxLayout="row" fxLayoutAlign="center">
+        <div (click)="onTranslate()" class="button">[ CLICK TO TRANSLATE ]</div>
+    </div>
+    <hr />
+    <div>
+        {{ translatedJson | json }}
+    </div>
+</div>
