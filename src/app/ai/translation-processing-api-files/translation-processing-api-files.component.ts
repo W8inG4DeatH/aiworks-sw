@@ -1,36 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TranslationProcessingApiFilesService } from './translation-processing-api-files.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'translation-processing-api-files',
     templateUrl: './translation-processing-api-files.component.html',
     styleUrls: ['./translation-processing-api-files.component.css'],
 })
-export class TranslationProcessingApiFilesComponent implements OnInit {
+export class TranslationProcessingApiFilesComponent implements OnInit, OnDestroy {
     public translatedJson: any;
+    public progressMessages: string[] = [];
+    private progressSubscriptions: Subscription[] = [];
+
+    public projectDirectoryPath: string[] = ['c:', 'sw-api-test', 'translate'];
+    public sourceFileName: string = 'source.json';
+    public sourceLanguage: string = 'en-US';
+    public targetLanguages: string[] = [
+        'pl-PL',
+        'de-DE',
+        'fr-FR',
+        'es-ES',
+        'pt-PT',
+        'it-IT',
+        'cs-CZ',
+        'sk-SK',
+        'uk-UA',
+        'zh-CN',
+    ];
 
     constructor(private translationProcessingApiFilesService: TranslationProcessingApiFilesService) {}
 
     ngOnInit() {}
 
     async onTranslate() {
-        try {
-            const targetLanguage = 'de-DE'; // target language
-            console.log('targetLanguage:', targetLanguage);
-            // Load the JSON file from assets
-            const jsonFile = await this.translationProcessingApiFilesService.getJsonFileData(targetLanguage);
-            console.log('getJsonFileData:', jsonFile);
-            // Send the JSON file to the backend for translation
-            const translated = await this.translationProcessingApiFilesService.sendForTranslation(
-                jsonFile,
-                targetLanguage,
-            );
-            console.log('translated:', translated);
-            // Assign the translated JSON to a variable
-            this.translatedJson = translated;
-            console.log('this.translatedJson:', this.translatedJson);
-        } catch (error) {
-            console.error('Error during translation:', error);
-        }
+        this.progressMessages = [];
+
+        // Unsubscribe from previous subscriptions
+        this.progressSubscriptions.forEach((subscription) => subscription.unsubscribe());
+        this.progressSubscriptions = [];
+
+        this.targetLanguages.forEach((language) => {
+            const subscription = this.translationProcessingApiFilesService
+                .getTranslationProgress(language)
+                .subscribe((progress) => {
+                    if (!this.progressMessages.includes(`File ${progress.status}: ${progress.language}.json`)) {
+                        this.progressMessages.push(`File ${progress.status}: ${progress.language}.json`);
+                    }
+                });
+            this.progressSubscriptions.push(subscription);
+        });
+
+        this.translationProcessingApiFilesService
+            .sendForTranslation(
+                this.projectDirectoryPath,
+                this.sourceFileName,
+                this.sourceLanguage,
+                this.targetLanguages,
+            )
+            .subscribe((result) => {
+                console.log('Translation complete', result);
+            });
+    }
+
+    ngOnDestroy() {
+        this.progressSubscriptions.forEach((subscription) => subscription.unsubscribe());
     }
 }

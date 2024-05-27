@@ -3,7 +3,26 @@
         <div (click)="onTranslate()" class="button">[ CLICK TO TRANSLATE ]</div>
     </div>
     <hr />
-    <div>
-        {{ translatedJson | json }}
+    <div class="header-container full-width" fxLayout="row">
+        <div fxLayout="column">
+            <div>Folder:</div>
+            <div>Source file:</div>
+            <div>Source language:</div>
+            <div>{{ targetLanguages.length }} to translate:</div>
+        </div>
+        <div class="second-column" fxLayout="column">
+            <div>{{ projectDirectoryPath.join('/') }}</div>
+            <div>{{ sourceFileName }}</div>
+            <div>{{ sourceLanguage }}</div>
+            <div>{{ targetLanguages.join(', ') }}</div>
+        </div>
+    </div>
+    <hr />
+    <div class="header-container full-width" fxLayout="column">
+        <div>Progress list:</div>
+        <br />
+        <ul>
+            <li *ngFor="let message of progressMessages">{{ message }}</li>
+        </ul>
     </div>
 </div>
