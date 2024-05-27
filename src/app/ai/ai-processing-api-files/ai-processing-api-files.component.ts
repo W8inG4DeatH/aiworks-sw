@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AiProcessingApiFilesService } from './ai-processing-api-files.service';
 import { EventSourcePolyfill } from 'event-source-polyfill';
+import { IAiFile } from 'src/app/common-components/file-chooser/file-chooser.interfaces';
 
 @Component({
     selector: 'ai-processing-api-files',
     templateUrl: './ai-processing-api-files.component.html',
-    styleUrls: ['./ai-processing-api-files.component.css'],
+    styleUrls: ['./ai-processing-api-files.component.scss'],
 })
 export class AiProcessingApiFilesComponent implements OnInit {
     public myAIPrompt: string = `
@@ -37,7 +38,10 @@ export class AiProcessingApiFilesComponent implements OnInit {
     Template:
     `;
 
+    files: IAiFile[] = [];
+
     progress: { completed: number; total: number } | null = null;
+
     constructor(private aiProcessingApiFilesService: AiProcessingApiFilesService) {}
 
     ngOnInit() {}

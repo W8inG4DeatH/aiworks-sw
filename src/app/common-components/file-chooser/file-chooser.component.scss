@@ -1,0 +1,25 @@
+.file-chooser-container {
+    line-height: 2rem;
+
+    .btn {
+        cursor: pointer;
+    }
+
+    .files-list-container {
+        input {
+            cursor: pointer;
+        }
+
+        .file-container {
+            line-height: 1rem;
+        }
+
+        .info {
+            margin: 0 10px;
+        }
+    }
+}
+
+.full-width {
+    width: 100%;
+}

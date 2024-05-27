@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'translation-processing-api-files',
     templateUrl: './translation-processing-api-files.component.html',
-    styleUrls: ['./translation-processing-api-files.component.css'],
+    styleUrls: ['./translation-processing-api-files.component.scss'],
 })
 export class TranslationProcessingApiFilesComponent implements OnInit, OnDestroy {
     public translatedJson: any;

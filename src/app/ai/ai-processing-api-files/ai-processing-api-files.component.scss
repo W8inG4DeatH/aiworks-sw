@@ -1,0 +1,38 @@
+.content-container {
+    line-height: 1.2rem;
+
+    .header-container {
+        padding: 0 20px;
+    }
+
+    .button {
+        cursor: pointer;
+    }
+
+    .full-width {
+        width: 100%;
+    }
+
+    .second-column {
+        margin-left: 15px;
+    }
+
+    .files-list-container {
+        input {
+            cursor: pointer;
+        }
+
+        .file-container {
+            line-height: 1rem;
+        }
+
+        .info {
+            margin: 0 10px;
+        }
+    }
+}
+
+hr {
+    width: 100%;
+    margin: 15px;
+}
