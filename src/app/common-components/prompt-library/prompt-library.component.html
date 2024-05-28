@@ -1,0 +1,18 @@
+<div>
+    <h2 class="title">Prompt Library:</h2>
+    <div *ngIf="files.length > 0">
+        <ul>
+            <li *ngFor="let file of files" (click)="selectFile(file)">
+                {{ file.Name }}
+            </li>
+        </ul>
+        <hr />
+        <div *ngIf="selectedFile">
+            <h3 class="title">Edit File:</h3>
+            <textarea [(ngModel)]="selectedFile.Content" rows="10" spellcheck="false" class="full-width"></textarea>
+            <button (click)="saveSelectedFile()">Save</button>
+            <button (click)="deleteFile(selectedFile)">Delete</button>
+        </div>
+    </div>
+    <div *ngIf="files.length === 0">No files found.</div>
+</div>

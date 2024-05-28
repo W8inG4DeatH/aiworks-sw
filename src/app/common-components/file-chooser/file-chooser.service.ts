@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IAiFile } from './file-chooser.interfaces';
+import { IAiFile } from 'src/app/common-components/common-components.interfaces';
 import { BACKEND_URL } from 'src/app/constants';
 
 @Injectable({
@@ -14,4 +14,3 @@ export class FileChooserService {
         return this.httpClient.post<IAiFile[]>(`${BACKEND_URL}/api/files/search`, { path, fileExtension, filters });
     }
 }
-

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TranslationProcessingApiFilesService } from './translation-processing-api-files.service';
+import { TranslationProcessingApiFilesService } from 'src/app/ai/translation-processing-api-files/translation-processing-api-files.service';
 import { Subscription } from 'rxjs';
 
 @Component({

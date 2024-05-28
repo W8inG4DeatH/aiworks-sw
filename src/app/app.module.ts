@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AppComponent } from 'src/app/app.component';
 
-import { CommonComponentsModule } from './common-components/common-components.module';
-import { AreasModule } from './areas/areas.module';
-import { AiModule } from './ai/ai.module';
+import { CommonComponentsModule } from 'src/app/common-components/common-components.module';
+import { AreasModule } from 'src/app/areas/areas.module';
+import { AiModule } from 'src/app/ai/ai.module';
 
-import { AppService } from './app.service';
-import { BACKEND_URL } from './constants';
+import { AppService } from 'src/app/app.service';
+import { BACKEND_URL } from 'src/app/constants';
 
 const config: SocketIoConfig = { url: BACKEND_URL, options: {} };
 

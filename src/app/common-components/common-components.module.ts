@@ -3,16 +3,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { FileChooserComponent } from './file-chooser/file-chooser.component';
+import { FileChooserComponent } from 'src/app/common-components/file-chooser/file-chooser.component';
 import { UserComponent } from 'src/app/common-components/user/user.component';
-import { HtmlEditorComponent } from './html-editor/html-editor.component';
+import { HtmlEditorComponent } from 'src/app/common-components/html-editor/html-editor.component';
+import { PromptLibraryComponent } from 'src/app/common-components/prompt-library/prompt-library.component';
 
-import { FileChooserService } from './file-chooser/file-chooser.service';
+import { FileChooserService } from 'src/app/common-components/file-chooser/file-chooser.service';
+import { PromptLibraryService } from 'src/app/common-components/prompt-library/prompt-library.service';
 
 @NgModule({
     imports: [CommonModule, FormsModule, FlexLayoutModule],
-    declarations: [FileChooserComponent, UserComponent, HtmlEditorComponent],
-    exports: [FileChooserComponent, UserComponent, HtmlEditorComponent],
-    providers: [FileChooserService],
+    declarations: [FileChooserComponent, UserComponent, HtmlEditorComponent, PromptLibraryComponent],
+    exports: [FileChooserComponent, UserComponent, HtmlEditorComponent, PromptLibraryComponent],
+    providers: [FileChooserService, PromptLibraryService],
 })
 export class CommonComponentsModule {}

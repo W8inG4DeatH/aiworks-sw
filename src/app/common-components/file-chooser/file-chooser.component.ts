@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { FileChooserService } from './file-chooser.service';
-import { IAiFile } from './file-chooser.interfaces';
+import { FileChooserService } from 'src/app/common-components/file-chooser/file-chooser.service';
+import { IAiFile } from 'src/app/common-components/common-components.interfaces';
 
 @Component({
     selector: 'file-chooser',

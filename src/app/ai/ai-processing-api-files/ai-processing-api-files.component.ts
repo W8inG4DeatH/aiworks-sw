@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AiProcessingApiFilesService } from './ai-processing-api-files.service';
 import { EventSourcePolyfill } from 'event-source-polyfill';
-import { IAiFile } from 'src/app/common-components/file-chooser/file-chooser.interfaces';
 import { cloneDeep } from 'lodash';
+import { AiProcessingApiFilesService } from 'src/app/ai/ai-processing-api-files/ai-processing-api-files.service';
+import { IAiFile } from 'src/app/common-components/common-components.interfaces';
+import { BACKEND_URL } from 'src/app/constants';
 
 @Component({
     selector: 'ai-processing-api-files',
@@ -66,7 +67,7 @@ export class AiProcessingApiFilesComponent implements OnInit {
     }
 
     listenToProgress() {
-        const eventSource = new EventSourcePolyfill('http://localhost:3000/aimodify/progress', {
+        const eventSource = new EventSourcePolyfill(`${BACKEND_URL}/aimodify/progress`, {
             heartbeatTimeout: 300000, // Set the timeout to 5 minutes
         });
 
