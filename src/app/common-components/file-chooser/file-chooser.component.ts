@@ -9,7 +9,7 @@ import { IAiFile } from './file-chooser.interfaces';
 })
 export class FileChooserComponent {
     @Output()
-    filesSelection = new EventEmitter<IAiFile[]>();
+    selectFilesEmitter = new EventEmitter<IAiFile[]>();
 
     files: IAiFile[] = [];
 
@@ -32,8 +32,11 @@ export class FileChooserComponent {
         });
     }
 
-    emitFilesSelection() {
-        const selectedFiles = this.files.filter((file) => file.Selected);
-        this.filesSelection.emit(selectedFiles);
+    getSelectedFiles() {
+        return this.files.filter((file) => file.Selected);
+    }
+
+    selectFiles() {
+        this.selectFilesEmitter.emit(this.getSelectedFiles());
     }
 }

@@ -1,26 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IAiFile } from 'src/app/common-components/file-chooser/file-chooser.interfaces';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AiProcessingApiFilesService {
-    constructor(private httpClient: HttpClient) {}
+    private apiUrl = 'http://localhost:3000/aimodify';
 
-    async sendForAIModificationFiles(pathSegments: string[], myAIPrompt: string): Promise<{ message: string }> {
-        const apiUrl = 'http://localhost:3000/aimodify';
-        try {
-            const response = await this.httpClient
-                .post<{ message: string }>(apiUrl, { pathSegments, myAIPrompt })
-                .toPromise();
-            if (!response) {
-                throw new Error('No response received from server.');
-            }
-            return response;
-        } catch (error) {
-            console.error('Error sending request to server:', error);
-            throw error;
-        }
+    constructor(private http: HttpClient) {}
+
+    sendForAIModificationFiles(files: IAiFile[], myAIPrompt: string): Observable<any> {
+        const body = {
+            files,
+            myAIPrompt,
+        };
+        return this.http.post(`${this.apiUrl}`, body);
     }
 }

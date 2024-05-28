@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AiProcessingApiFilesService } from './ai-processing-api-files.service';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { IAiFile } from 'src/app/common-components/file-chooser/file-chooser.interfaces';
+import { cloneDeep } from 'lodash';
 
 @Component({
     selector: 'ai-processing-api-files',
@@ -9,8 +10,7 @@ import { IAiFile } from 'src/app/common-components/file-chooser/file-chooser.int
     styleUrls: ['./ai-processing-api-files.component.scss'],
 })
 export class AiProcessingApiFilesComponent implements OnInit {
-    public myAIPrompt: string = `
-    Chcę templatkę komponentu Angular/TypeScript zmodyfikować zamieniając wszystkie elementy pochodzące z biblioteki angular-flex-layout na elementy z biblioteki Tilewind.
+    public myAIPrompt: string = `Chcę templatkę komponentu Angular/TypeScript zmodyfikować zamieniając wszystkie elementy pochodzące z biblioteki angular-flex-layout na elementy z biblioteki Tilewind.
     Nie używaj klas Tilewind jako atrybutów, a tylko jako nazwy klas.
     Uważaj na zduplikowanie class="..." w tym samym elemencie html. Wszystkie klasy dla danego elementu powinny być w jednym class="...".
     Oto główne zasady modyfikacji:
@@ -39,43 +39,65 @@ export class AiProcessingApiFilesComponent implements OnInit {
     `;
 
     files: IAiFile[] = [];
-
     progress: { completed: number; total: number } | null = null;
+    processing: boolean = false;
 
     constructor(private aiProcessingApiFilesService: AiProcessingApiFilesService) {}
 
     ngOnInit() {}
 
     async onAIModificationFiles() {
+        this.processing = true;
         try {
-            const projectDirectoryPath = ['c:', 'sw-api-test', 'src'];
             this.listenToProgress();
-            const modifyResponse = await this.aiProcessingApiFilesService.sendForAIModificationFiles(
-                projectDirectoryPath,
-                this.myAIPrompt,
-            );
+            for (let file of this.files) {
+                file.Processed = true;
+            }
+            const modifyResponse = await this.aiProcessingApiFilesService
+                .sendForAIModificationFiles(this.files, this.myAIPrompt)
+                .toPromise();
             console.log('modifyResponse:', modifyResponse);
             console.log('Response message:', modifyResponse.message);
         } catch (error) {
             console.error('Error during AI modification:', error);
+        } finally {
+            this.processing = false;
         }
     }
 
     listenToProgress() {
         const eventSource = new EventSourcePolyfill('http://localhost:3000/aimodify/progress', {
-            headers: {
-                Authorization: 'Bearer YOUR_TOKEN',
-            },
+            heartbeatTimeout: 300000, // Set the timeout to 5 minutes
         });
 
         eventSource.onmessage = (event) => {
             this.progress = JSON.parse(event.data);
             console.log(`Progress: ${this.progress?.completed}/${this.progress?.total}`);
+            this.updateFileProgress(this.progress?.completed || 0, this.progress?.total || 0);
         };
 
         eventSource.onerror = (error) => {
             console.error('Error receiving progress:', error);
             eventSource.close();
         };
+    }
+
+    updateFileProgress(completed: number, total: number) {
+        this.files.forEach((file, index) => {
+            if (index < completed) {
+                file.Processed = false;
+                file.Done = true;
+            } else if (index < total) {
+                file.Processed = true;
+                file.Done = false;
+            } else {
+                file.Processed = false;
+                file.Done = false;
+            }
+        });
+    }
+
+    selectFiles(filesData: IAiFile[]): void {
+        this.files = cloneDeep(filesData);
     }
 }

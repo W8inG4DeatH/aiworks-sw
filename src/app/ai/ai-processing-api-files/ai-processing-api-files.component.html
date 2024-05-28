@@ -1,11 +1,10 @@
 <div class="content-container" fxLayout="column" fxLayoutAlign="start">
-    <div class="header-container full-width" fxLayout="row" fxLayoutAlign="center">
+    <div *ngIf="!processing" class="header-container full-width" fxLayout="row" fxLayoutAlign="center">
         <div (click)="onAIModificationFiles()" class="btn" fxLayout="row">
             <div>[ MODIFY FILES with AI ]</div>
         </div>
     </div>
-    <hr />
-    <div class="header-container full-width" fxLayout="row" fxLayoutAlign="center">
+    <div *ngIf="processing" class="header-container full-width" fxLayout="row" fxLayoutAlign="center">
         <div fxLayout="row">
             <div>Progress: {{ progress?.completed }} / {{ progress?.total }}</div>
         </div>
@@ -13,12 +12,12 @@
     <hr />
     <div class="header-container full-width" fxLayout="row">
         <div class="header-container full-width" fxLayout="column" fxFlex="50">
-            <h1>Choose files:</h1>
-            <file-chooser></file-chooser>
+            <h1 class="title">Choose files:</h1>
+            <file-chooser (selectFilesEmitter)="selectFiles($event)"></file-chooser>
         </div>
 
         <div class="header-container full-width" fxLayout="column" fxFlex="50">
-            <h1>Prompt:</h1>
+            <h1 class="title">Prompt:</h1>
             <textarea
                 [(ngModel)]="myAIPrompt"
                 rows="25"
@@ -26,15 +25,14 @@
                 class="full-width"
             ></textarea>
             <hr />
-            <hr />
-            <div class="files-list-container" fxLayout="column">
+            <div *ngIf="files?.length" class="files-list-container" fxLayout="column">
+                <div class="title">Selected files ({{ files.length }}):</div>
                 <div *ngFor="let file of files" class="file-container" fxLayout="row">
-                    <input type="checkbox" [(ngModel)]="file.Selected" />
                     <div class="info">
-                        <ng-container *ngIf="file.Done; else notDone">+</ng-container>
+                        <ng-container *ngIf="file.Done; else notDone">&#10003;</ng-container>
                         <ng-template #notDone>
-                            <ng-container *ngIf="file.Processed; else notProcessed">...</ng-container>
-                            <ng-template #notProcessed>-</ng-template>
+                            <ng-container *ngIf="file.Processed; else notProcessed">&#8987;</ng-container>
+                            <ng-template #notProcessed>&#10596;</ng-template>
                         </ng-template>
                     </div>
                     <div>{{ file.FullPath }}</div>
@@ -42,6 +40,5 @@
             </div>
         </div>
     </div>
-
     <hr />
 </div>
