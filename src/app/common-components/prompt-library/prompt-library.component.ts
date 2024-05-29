@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PromptLibraryService } from 'src/app/common-components/prompt-library/prompt-library.service';
 import { IAiFile } from 'src/app/common-components/common-components.interfaces';
 
@@ -8,11 +8,18 @@ import { IAiFile } from 'src/app/common-components/common-components.interfaces'
     styleUrls: ['./prompt-library.component.scss'],
 })
 export class PromptLibraryComponent implements OnInit {
+    @Output()
+    selectPromptEmitter = new EventEmitter<IAiFile | null>();
+
     public projectDirectoryPath: string[] = ['c:', 'project', 'aiworks-prompts'];
     files: IAiFile[] = [];
     selectedFile: IAiFile | null = null;
 
     constructor(private promptLibraryService: PromptLibraryService) {}
+
+    get directoryPath(): string {
+        return this.projectDirectoryPath.join('/');
+    }
 
     ngOnInit(): void {
         this.loadFiles();
@@ -25,26 +32,29 @@ export class PromptLibraryComponent implements OnInit {
         });
     }
 
+    onSelectFile(file: IAiFile): void {
+        this.selectedFile = file;
+    }
+
     updateFile(file: IAiFile): void {
         this.promptLibraryService.updateTxtFile(file).subscribe(() => {
-            this.loadFiles();
+            // this.loadFiles();
         });
     }
 
-    deleteFile(file: IAiFile): void {
+    onDeleteSelectedFile(file: IAiFile): void {
         this.promptLibraryService.deleteTxtFile(file).subscribe(() => {
             this.loadFiles();
         });
     }
 
-    selectFile(file: IAiFile): void {
-        this.selectedFile = file;
-    }
-
-    saveSelectedFile(): void {
+    onSaveFile(): void {
         if (this.selectedFile) {
             this.updateFile(this.selectedFile);
-            this.selectedFile = null;
         }
+    }
+
+    onUsePrompt(): void {
+        this.selectPromptEmitter.emit(this.selectedFile);
     }
 }

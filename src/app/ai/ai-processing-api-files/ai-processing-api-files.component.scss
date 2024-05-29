@@ -1,16 +1,12 @@
 .content-container {
     line-height: 1.2rem;
 
-    .header-container {
-        padding: 0 20px;
-    }
-
     .button {
         cursor: pointer;
     }
 
-    .full-width {
-        width: 100%;
+    .header-button-container {
+        height: 70px;
     }
 
     .second-column {
@@ -29,9 +25,5 @@
         .info {
             margin: 0 10px;
         }
-    }
-
-    textarea {
-        padding: 10px;
     }
 }

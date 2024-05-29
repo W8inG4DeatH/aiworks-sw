@@ -1,28 +1,45 @@
 @import 'src/assets/scss/colors.scss';
 
-.comix-main-container {
+.full-width {
+    width: 100%;
+}
+
+.aiworks-sw-main-container {
     height: 100%;
     overflow: hidden;
 
-    .comix-main {
+    .aiworks-sw-main {
         height: calc(100% - 60px);
 
         .main-menu {
             width: 200px;
         }
 
-        .comix-main-content-container {
-            padding: 20px;
+        .aiworks-sw-main-content-container {
+            padding: 10px;
             height: 100%;
             overflow-y: auto;
         }
     }
 }
 
-.content-container {
+.component-container {
+    padding: 10px 15px;
+    background-color: antiquewhite;
     border-radius: 1rem;
-    border: 2px solid $blue-grey;
-    padding: 15px;
+    border: 1px solid grey;
+}
+
+.content-container {
+    background-color: white;
+    border-radius: 1rem;
+    border: 1px solid gray;
+    padding: 10px;
+    margin: 5px;
+
+    &.gray {
+        background-color: lightgray;
+    }
 }
 
 hr {
@@ -33,4 +50,33 @@ hr {
 .title {
     font-weight: bolder;
     margin-bottom: 10px;
+}
+
+.bolder {
+    font-weight: bolder;
+}
+
+.truncate-end {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.truncate-start {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  direction: rtl;
+  text-align: left;
+}
+
+textarea {
+    padding: 10px;
+}
+
+textarea[autoheight] {
+    overflow: hidden;
+    resize: none;
+    box-sizing: border-box;
 }

@@ -1,0 +1,17 @@
+.prompt-library-container {
+    line-height: 1.5rem;
+
+    .files-list-container {
+        .file-container {
+            cursor: pointer;
+
+            &.selected {
+                font-weight: bold;
+            }
+
+            .selector, .file-content {
+                margin-left: 10px;
+            }
+        }
+    }
+}

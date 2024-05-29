@@ -11,10 +11,24 @@ import { PromptLibraryComponent } from 'src/app/common-components/prompt-library
 import { FileChooserService } from 'src/app/common-components/file-chooser/file-chooser.service';
 import { PromptLibraryService } from 'src/app/common-components/prompt-library/prompt-library.service';
 
+import { TextareaAutoheightDirective } from 'src/app/directives/textarea-autoheight.directive';
+
 @NgModule({
     imports: [CommonModule, FormsModule, FlexLayoutModule],
-    declarations: [FileChooserComponent, UserComponent, HtmlEditorComponent, PromptLibraryComponent],
-    exports: [FileChooserComponent, UserComponent, HtmlEditorComponent, PromptLibraryComponent],
+    declarations: [
+        FileChooserComponent,
+        UserComponent,
+        HtmlEditorComponent,
+        PromptLibraryComponent,
+        TextareaAutoheightDirective,
+    ],
+    exports: [
+        FileChooserComponent,
+        UserComponent,
+        HtmlEditorComponent,
+        PromptLibraryComponent,
+        TextareaAutoheightDirective,
+    ],
     providers: [FileChooserService, PromptLibraryService],
 })
 export class CommonComponentsModule {}

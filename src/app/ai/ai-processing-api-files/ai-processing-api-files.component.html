@@ -1,33 +1,35 @@
-<div class="content-container" fxLayout="column" fxLayoutAlign="start">
-    <div *ngIf="!processing" class="header-container full-width" fxLayout="row" fxLayoutAlign="center">
-        <div (click)="onAIModificationFiles()" class="btn" fxLayout="row">
+<div class="content-container gray" fxLayout="column" fxLayoutAlign="start">
+    <div *ngIf="!processing" class="content-container header-button-container" fxLayout="row" fxLayoutAlign="center center">
+        <div *ngIf="canModifyFilesWithAi()" (click)="onAIModificationFiles()" class="btn" fxLayout="row">
             <div>[ MODIFY FILES with AI ]</div>
         </div>
+        <div *ngIf="!canModifyFilesWithAi()" class="bolder">CONFIGURE the PROCESS</div>
     </div>
-    <div *ngIf="processing" class="header-container full-width" fxLayout="row" fxLayoutAlign="center">
+    <div *ngIf="processing" class="content-container header-button-container" fxLayout="row" fxLayoutAlign="center center">
         <div fxLayout="row">
             <div>Progress: {{ progress?.completed }} / {{ progress?.total }}</div>
         </div>
     </div>
-    <hr />
-    <div class="header-container full-width" fxLayout="row">
-        <div class="header-container full-width" fxLayout="column" fxFlex="50">
-            <h1 class="title">Choose files:</h1>
-            <file-chooser (selectFilesEmitter)="selectFiles($event)"></file-chooser>
+    <div class="section-container full-width" fxLayout="row">
+        <div class="content-container full-width" fxLayout="column" fxFlex="50">
+            <prompt-library (selectPromptEmitter)="selectPrompt($event)"></prompt-library>
         </div>
-
-        <div class="header-container full-width" fxLayout="column" fxFlex="50">
-            <prompt-library></prompt-library>
-            <hr />
-            <h1 class="title">Prompt:</h1>
+        <div class="content-container full-width" fxLayout="column" fxFlex="50">
+            <h1 class="title">Prompt used in the process:</h1>
             <textarea
                 [(ngModel)]="myAIPrompt"
-                rows="25"
-                placeholder="Enter your AI prompt here"
+                placeholder="Select your AI prompt from library or enter here"
                 spellcheck="false"
                 class="full-width"
+                autoheight
             ></textarea>
-            <hr />
+        </div>
+    </div>
+    <div class="section-container" fxLayout="row">
+        <div class="content-container full-width" fxLayout="column" fxFlex="50">
+            <file-chooser (selectFilesEmitter)="selectFiles($event)"></file-chooser>
+        </div>
+        <div class="content-container full-width" fxLayout="column" fxFlex="50">
             <div *ngIf="files?.length" class="files-list-container" fxLayout="column">
                 <div class="title">Selected files ({{ files.length }}):</div>
                 <div *ngFor="let file of files" class="file-container" fxLayout="row">
@@ -43,5 +45,4 @@
             </div>
         </div>
     </div>
-    <hr />
 </div>

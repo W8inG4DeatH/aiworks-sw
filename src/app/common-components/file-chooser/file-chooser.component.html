@@ -1,12 +1,23 @@
-<div class="file-chooser-container full-width" fxLayout="column">
-    <div>Current directory: {{ directoryPath }}</div>
-    <div>
-        File extension:
-        <input type="text" [(ngModel)]="fileExtension" />
+<div class="component-container file-chooser-container full-width" fxLayout="column">
+    <div class="title">Choose filters and Search files:</div>
+
+    <div class="full-width" fxLayout="row">
+        <div fxLayout="row" fxFlex="50">Current directory:</div>
+        <div fxLayout="row" fxFlex="50">
+            {{ directoryPath }}
+        </div>
     </div>
-    <div>
-        Filter strings (comma separated):
-        <input type="text" [(ngModel)]="fileFilterStrings" />
+    <div class="full-width" fxLayout="row">
+        <div fxLayout="row" fxFlex="50">File extension:</div>
+        <div fxLayout="row" fxFlex="50">
+            <input type="text" class="full-width" [(ngModel)]="fileExtension" />
+        </div>
+    </div>
+    <div class="full-width" fxLayout="row">
+        <div fxLayout="row" fxFlex="50">Filter strings (comma separated):</div>
+        <div fxLayout="row" fxFlex="50">
+            <input type="text" class="full-width" [(ngModel)]="fileFilterStrings" />
+        </div>
     </div>
     <hr />
     <div>
@@ -16,7 +27,8 @@
     </div>
     <hr />
     <div class="files-list-container" fxLayout="column">
-        <div *ngIf="files?.length" class="title">Found files ({{ getSelectedFiles().length }}/{{ files.length }}):</div>
+      <div *ngIf="!files?.length" class="title">Found files:</div>
+      <div *ngIf="files?.length" class="title">Found files ({{ getSelectedFiles().length }}/{{ files.length }}):</div>
         <div *ngFor="let file of files" class="file-container" fxLayout="row">
             <input type="checkbox" [(ngModel)]="file.Selected" />
             <div>{{ file.FullPath }}</div>
@@ -28,5 +40,4 @@
             <div class="btn">[ SELECT FILES ]</div>
         </div>
     </div>
-    <hr />
 </div>

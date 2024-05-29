@@ -1,17 +1,27 @@
-<div>
-    <h2 class="title">Prompt Library:</h2>
+<div class="component-container prompt-library-container">
+    <div class="title">Select prompt from directory:&nbsp;{{ directoryPath }}</div>
     <div *ngIf="files.length > 0">
-        <ul>
-            <li *ngFor="let file of files" (click)="selectFile(file)">
-                {{ file.Name }}
-            </li>
-        </ul>
-        <hr />
+        <div class="files-list-container">
+            <div
+                *ngFor="let file of files"
+                (click)="onSelectFile(file)"
+                class="file-container"
+                [ngClass]="{ selected: file === selectedFile }"
+                fxLayout="row"
+            >
+                <div class="truncate-start" fxFlex="50" title="{{ file.FullPath }}">{{ file.Name }}</div>
+                <div class="truncate-end file-content" fxFlex="50" title="{{ file.Content }}">({{ file.Content }}</div>
+                )
+            </div>
+        </div>
         <div *ngIf="selectedFile">
-            <h3 class="title">Edit File:</h3>
-            <textarea [(ngModel)]="selectedFile.Content" rows="10" spellcheck="false" class="full-width"></textarea>
-            <button (click)="saveSelectedFile()">Save</button>
-            <button (click)="deleteFile(selectedFile)">Delete</button>
+            <hr />
+            <textarea [(ngModel)]="selectedFile.Content" spellcheck="false" class="full-width" autoheight></textarea>
+            <hr />
+            <div fxLayout="row" fxLayoutAlign="space-around">
+                <div (click)="onSaveFile()" class="btn" fxFlex="40">Save</div>
+                <div (click)="onUsePrompt()" class="btn" fxFlex="40">Select</div>
+            </div>
         </div>
     </div>
     <div *ngIf="files.length === 0">No files found.</div>
