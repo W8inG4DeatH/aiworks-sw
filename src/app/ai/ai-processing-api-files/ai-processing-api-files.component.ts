@@ -11,7 +11,7 @@ import { BACKEND_URL } from 'src/app/constants';
     styleUrls: ['./ai-processing-api-files.component.scss'],
 })
 export class AiProcessingApiFilesComponent implements OnInit {
-    myAIPrompt: string = 'Test';
+    myAIPrompt: string = '';
     files: IAiFile[] = [];
     progress: { completed: number; total: number } | null = null;
     processing: boolean = false;

@@ -1,6 +1,12 @@
 .content-container {
     line-height: 1.2rem;
 
+    .section-container {
+        .content-container {
+            width: 50%;
+        }
+    }
+
     .subcontainer {
         margin-left: 15px;
     }
@@ -23,11 +29,15 @@
         }
 
         .file-container {
-            line-height: 1rem;
+            line-height: 1.2rem;
         }
 
         .info {
             margin: 0 10px;
+        }
+
+        .tokens {
+            white-space: nowrap;
         }
     }
 }

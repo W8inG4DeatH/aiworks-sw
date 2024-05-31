@@ -57,6 +57,7 @@ export class PromptLibraryComponent implements OnInit {
     onSaveFile(): void {
         if (this.selectedFile) {
             this.updateFile(this.selectedFile);
+            this.editMode = false;
         }
     }
 

@@ -30,7 +30,7 @@
       <div class="title">Found files ({{ getSelectedFiles().length }}/{{ files.length }}):</div>
         <div *ngFor="let file of files" class="file-container" fxLayout="row">
             <input type="checkbox" [(ngModel)]="file.Selected" />
-            <div>{{ file.FullPath }}</div>
+            <div class="truncate-start" title="{{ file.FullPath }}">{{ file.FullPath }}</div>
         </div>
     </div>
     <hr *ngIf="files?.length">

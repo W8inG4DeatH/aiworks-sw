@@ -23,11 +23,11 @@
         </div>
     </div>
 
-    <div class="section-container full-width" fxLayout="row">
-        <div class="content-container full-width" fxLayout="column" fxFlex="50">
+    <div class="section-container" fxLayout="row">
+        <div class="content-container" fxLayout="column">
             <prompt-library (selectPromptEmitter)="selectPrompt($event)"></prompt-library>
         </div>
-        <div class="content-container full-width" fxLayout="column" fxFlex>
+        <div class="content-container" fxLayout="column">
             <div class="title">Prompt used in the process:</div>
             <textarea
                 [(ngModel)]="myAIPrompt"
@@ -40,10 +40,10 @@
     </div>
 
     <div class="section-container" fxLayout="row">
-        <div class="content-container full-width" fxLayout="column" fxFlex="50">
+        <div class="content-container" fxLayout="column">
             <file-chooser (selectFilesEmitter)="selectFiles($event)"></file-chooser>
         </div>
-        <div class="content-container full-width" fxLayout="column" fxFlex>
+        <div class="content-container" fxLayout="column">
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <div class="column">
                     <div>
@@ -72,7 +72,7 @@
                 </div>
                 <hr *ngIf="canProcessFilesWithAi() && totalProcessCostInDollars === 0" />
                 <div class="title">Selected files ({{ files.length }}):</div>
-                <div *ngFor="let file of files" class="file-container" fxLayout="row">
+                <div *ngFor="let file of files" class="file-container" fxLayout="row" fxLayoutAlign="start center">
                     <div class="info">
                         <ng-container *ngIf="file.Done; else notDone">&#10003;</ng-container>
                         <ng-template #notDone>
@@ -80,13 +80,12 @@
                             <ng-template #notProcessed>&#10596;</ng-template>
                         </ng-template>
                     </div>
-                    <div class="truncate-start" fxFlex>{{ file.FullPath }}</div>
-                    <div *ngIf="file.InputTokens && file.OutputTokens" class="subcontainer">
+                    <div class="file-path truncate-start">{{ file.FullPath }}</div>
+                    <div *ngIf="file.InputTokens && file.OutputTokens" class="subcontainer tokens">
                         (IT:{{ file.InputTokens }} OT:{{ file.OutputTokens }})
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
