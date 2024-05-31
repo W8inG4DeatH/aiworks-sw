@@ -3,10 +3,10 @@
 $headerHeight: 60px;
 
 .aiworks-sw-main-header-container {
+    background-color: antiquewhite;
+    color: $black;
     height: $headerHeight;
-    color: $white;
     padding: 10px 20px;
-    background-color: $field-border;
 
     .main-logo-container {
         font-size: bolder;

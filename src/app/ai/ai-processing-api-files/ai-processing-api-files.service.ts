@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IAiFile } from 'src/app/common-components/common-components.interfaces';
+import { IAiFile, IOpenAIModel } from 'src/app/common-components/common-components.interfaces';
 import { BACKEND_URL } from 'src/app/constants';
 
 @Injectable({
@@ -12,8 +12,9 @@ export class AiProcessingApiFilesService {
 
     constructor(private http: HttpClient) {}
 
-    sendFilesForAIProcess(files: IAiFile[], myAIPrompt: string): Observable<any> {
+    sendFilesForAIProcess(openAiModel: IOpenAIModel, files: IAiFile[], myAIPrompt: string): Observable<any> {
         const body = {
+            openAiModel,
             files,
             myAIPrompt,
         };

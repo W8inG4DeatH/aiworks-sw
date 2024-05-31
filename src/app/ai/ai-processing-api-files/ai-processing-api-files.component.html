@@ -6,9 +6,11 @@
         fxLayoutAlign="center center"
     >
         <div *ngIf="canProcessFilesWithAi()" (click)="onAIProcessFiles()" class="btn" fxLayout="row">
-            [ PROCESS FILES with AI ]
+            [ PROCESS FILES with OpenAI model {{ openAiModel }} ]
         </div>
-        <div *ngIf="!canProcessFilesWithAi()" class="bolder">AI API - CONFIGURE the PROCESS</div>
+        <div *ngIf="!canProcessFilesWithAi()" class="bolder">
+            CONFIGURE PROCESSING for OpenAI model {{ openAiModel }}
+        </div>
     </div>
     <div
         *ngIf="processing"
@@ -20,11 +22,12 @@
             <div>Progress: {{ progress?.completed }} / {{ progress?.total }}</div>
         </div>
     </div>
+
     <div class="section-container full-width" fxLayout="row">
         <div class="content-container full-width" fxLayout="column" fxFlex="50">
             <prompt-library (selectPromptEmitter)="selectPrompt($event)"></prompt-library>
         </div>
-        <div class="content-container full-width" fxLayout="column" fxFlex="50">
+        <div class="content-container full-width" fxLayout="column" fxFlex>
             <div class="title">Prompt used in the process:</div>
             <textarea
                 [(ngModel)]="myAIPrompt"
@@ -35,14 +38,39 @@
             ></textarea>
         </div>
     </div>
+
     <div class="section-container" fxLayout="row">
         <div class="content-container full-width" fxLayout="column" fxFlex="50">
             <file-chooser (selectFilesEmitter)="selectFiles($event)"></file-chooser>
         </div>
-        <div class="content-container full-width" fxLayout="column" fxFlex="50">
+        <div class="content-container full-width" fxLayout="column" fxFlex>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="column">
+                    <div>
+                        COST with model <span class="bolder">{{ openAiModel }}</span
+                        >: <span class="bolder">{{ totalProcessCostInDollars }}$</span>
+                    </div>
+                </div>
+                <div fxFlex></div>
+                <div class="column">Pricing:</div>
+                <div class="column subcontainer">
+                    <div>{{ inputTokensCostInDollars }}$/{{ costUnitTokens }}IT</div>
+                </div>
+                <div class="column subcontainer">
+                    <div>{{ outputTokensCostInDollars }}$/{{ costUnitTokens }}OT</div>
+                </div>
+            </div>
+            <hr />
             <div *ngIf="files?.length" class="files-list-container" fxLayout="column">
-                <div *ngIf="canProcessFilesWithAi()" (click)="calculateTokensForFiles()" class="btn" fxLayout="row">[ CALCULATE TOKENS and COST ]</div>
-                <hr />
+                <div
+                    *ngIf="canProcessFilesWithAi() && totalProcessCostInDollars === 0"
+                    (click)="calculateTokensForFiles()"
+                    class="btn"
+                    fxLayout="row"
+                >
+                    [ CALCULATE TOKENS and COST ]
+                </div>
+                <hr *ngIf="canProcessFilesWithAi() && totalProcessCostInDollars === 0" />
                 <div class="title">Selected files ({{ files.length }}):</div>
                 <div *ngFor="let file of files" class="file-container" fxLayout="row">
                     <div class="info">
@@ -52,10 +80,13 @@
                             <ng-template #notProcessed>&#10596;</ng-template>
                         </ng-template>
                     </div>
-                    <div>{{ file.FullPath }}</div>
-                    <div *ngIf="file.Tokens">&nbsp;({{ file.Tokens }})</div>
+                    <div class="truncate-start" fxFlex>{{ file.FullPath }}</div>
+                    <div *ngIf="file.InputTokens && file.OutputTokens" class="subcontainer">
+                        (IT:{{ file.InputTokens }} OT:{{ file.OutputTokens }})
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>

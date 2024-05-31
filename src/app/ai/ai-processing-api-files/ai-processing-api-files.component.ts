@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { cloneDeep } from 'lodash';
 import { AiProcessingApiFilesService } from 'src/app/ai/ai-processing-api-files/ai-processing-api-files.service';
-import { IAiFile } from 'src/app/common-components/common-components.interfaces';
+import { IAiFile, IOpenAIModel } from 'src/app/common-components/common-components.interfaces';
 import { BACKEND_URL } from 'src/app/constants';
 
 @Component({
@@ -11,10 +11,19 @@ import { BACKEND_URL } from 'src/app/constants';
     styleUrls: ['./ai-processing-api-files.component.scss'],
 })
 export class AiProcessingApiFilesComponent implements OnInit {
-    myAIPrompt: string = '';
+    myAIPrompt: string = 'Test';
     files: IAiFile[] = [];
     progress: { completed: number; total: number } | null = null;
     processing: boolean = false;
+
+    ////////////////////////
+    // GPT Data for input //
+    public openAiModel: IOpenAIModel = IOpenAIModel.GPT4o;
+    public inputTokensCostInDollars: number = 5;
+    public outputTokensCostInDollars: number = 15;
+    public costUnitTokens: number = 1000000;
+    ////////////////////////
+    public totalProcessCostInDollars: number = 0;
 
     constructor(private aiProcessingApiFilesService: AiProcessingApiFilesService) {}
 
@@ -27,6 +36,7 @@ export class AiProcessingApiFilesComponent implements OnInit {
                     .sendFilesForAIProcessTokens(this.files, this.myAIPrompt)
                     .toPromise();
                 this.files = updatedFiles ?? this.files;
+                this.calculateTotalCostOfProcess();
             } catch (error) {
                 console.error('Error calculating tokens for files:', error);
             }
@@ -42,7 +52,7 @@ export class AiProcessingApiFilesComponent implements OnInit {
                     file.Processed = true;
                 }
                 const ProcessResponse = await this.aiProcessingApiFilesService
-                    .sendFilesForAIProcess(this.files, this.myAIPrompt)
+                    .sendFilesForAIProcess(this.openAiModel, this.files, this.myAIPrompt)
                     .toPromise();
                 console.log('Response message:', ProcessResponse.message);
             } catch (error) {
@@ -87,13 +97,29 @@ export class AiProcessingApiFilesComponent implements OnInit {
 
     selectPrompt(prompt: IAiFile | null): void {
         this.myAIPrompt = prompt?.Content ?? '';
+        this.totalProcessCostInDollars = 0;
     }
 
     selectFiles(filesData: IAiFile[]): void {
         this.files = cloneDeep(filesData);
+        this.totalProcessCostInDollars = 0;
     }
 
     canProcessFilesWithAi(): boolean {
         return this.myAIPrompt?.length > 0 && this.files?.length > 0;
+    }
+
+    calculateTotalCostOfProcess(): void {
+        let totalCost = 0;
+        if (this.files.length > 0) {
+            for (const file of this.files) {
+                if (file.InputTokens && file.OutputTokens) {
+                    const inputCost = (file.InputTokens / this.costUnitTokens) * this.inputTokensCostInDollars;
+                    const outputCost = (file.OutputTokens / this.costUnitTokens) * this.outputTokensCostInDollars;
+                    totalCost += inputCost + outputCost;
+                }
+            }
+        }
+        this.totalProcessCostInDollars = Math.ceil(totalCost * 100) / 100;
     }
 }
