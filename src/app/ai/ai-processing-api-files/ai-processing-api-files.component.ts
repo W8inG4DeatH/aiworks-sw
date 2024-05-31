@@ -20,19 +20,31 @@ export class AiProcessingApiFilesComponent implements OnInit {
 
     ngOnInit() {}
 
-    async onAIModificationFiles() {
-        if (this.canModifyFilesWithAi()) {
+    async calculateTokensForFiles() {
+        if (this.files.length > 0 && this.myAIPrompt) {
+            try {
+                const updatedFiles = await this.aiProcessingApiFilesService
+                    .sendFilesForAIProcessTokens(this.files, this.myAIPrompt)
+                    .toPromise();
+                this.files = updatedFiles ?? this.files;
+            } catch (error) {
+                console.error('Error calculating tokens for files:', error);
+            }
+        }
+    }
+
+    async onAIProcessFiles() {
+        if (this.canProcessFilesWithAi()) {
             this.processing = true;
             try {
                 this.listenToProgress();
                 for (let file of this.files) {
                     file.Processed = true;
                 }
-                const modifyResponse = await this.aiProcessingApiFilesService
-                    .sendForAIModificationFiles(this.files, this.myAIPrompt)
+                const ProcessResponse = await this.aiProcessingApiFilesService
+                    .sendFilesForAIProcess(this.files, this.myAIPrompt)
                     .toPromise();
-                console.log('modifyResponse:', modifyResponse);
-                console.log('Response message:', modifyResponse.message);
+                console.log('Response message:', ProcessResponse.message);
             } catch (error) {
                 console.error('Error during AI modification:', error);
             } finally {
@@ -42,7 +54,7 @@ export class AiProcessingApiFilesComponent implements OnInit {
     }
 
     listenToProgress() {
-        const eventSource = new EventSourcePolyfill(`${BACKEND_URL}/aimodify/progress`, {
+        const eventSource = new EventSourcePolyfill(`${BACKEND_URL}/aiprocess/progress`, {
             heartbeatTimeout: 300000, // Set the timeout to 5 minutes
         });
 
@@ -81,7 +93,7 @@ export class AiProcessingApiFilesComponent implements OnInit {
         this.files = cloneDeep(filesData);
     }
 
-    canModifyFilesWithAi(): boolean {
+    canProcessFilesWithAi(): boolean {
         return this.myAIPrompt?.length > 0 && this.files?.length > 0;
     }
 }

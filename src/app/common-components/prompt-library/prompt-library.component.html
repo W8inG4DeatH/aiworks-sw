@@ -14,12 +14,17 @@
                 )
             </div>
         </div>
-        <div *ngIf="selectedFile">
+        <div *ngIf="selectedFile" class="files-list-container">
             <hr />
-            <textarea [(ngModel)]="selectedFile.Content" spellcheck="false" class="full-width" autoheight></textarea>
+            <div class="file-container selected" fxLayout="row">
+                <div class="truncate-start" title="{{ selectedFile.FullPath }}">{{ selectedFile.FullPath }}</div>
+            </div>
             <hr />
+            <textarea *ngIf="editMode" [(ngModel)]="selectedFile.Content" spellcheck="false" class="full-width" autoheight></textarea>
+            <hr *ngIf="editMode">
             <div fxLayout="row" fxLayoutAlign="space-around">
-                <div (click)="onSaveFile()" class="btn" fxFlex="40">Save</div>
+                <div *ngIf="!editMode" (click)="onEditFile()" class="btn" fxFlex="40">Edit</div>
+                <div *ngIf="editMode" (click)="onSaveFile()" class="btn" fxFlex="40">Save</div>
                 <div (click)="onUsePrompt()" class="btn" fxFlex="40">Select</div>
             </div>
         </div>

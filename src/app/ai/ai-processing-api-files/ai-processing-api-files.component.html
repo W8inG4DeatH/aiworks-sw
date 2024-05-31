@@ -1,11 +1,21 @@
 <div class="content-container gray" fxLayout="column" fxLayoutAlign="start">
-    <div *ngIf="!processing" class="content-container header-button-container" fxLayout="row" fxLayoutAlign="center center">
-        <div *ngIf="canModifyFilesWithAi()" (click)="onAIModificationFiles()" class="btn" fxLayout="row">
-            <div>[ MODIFY FILES with AI ]</div>
+    <div
+        *ngIf="!processing"
+        class="content-container header-button-container"
+        fxLayout="row"
+        fxLayoutAlign="center center"
+    >
+        <div *ngIf="canProcessFilesWithAi()" (click)="onAIProcessFiles()" class="btn" fxLayout="row">
+            [ PROCESS FILES with AI ]
         </div>
-        <div *ngIf="!canModifyFilesWithAi()" class="bolder">AI API - CONFIGURE the PROCESS</div>
+        <div *ngIf="!canProcessFilesWithAi()" class="bolder">AI API - CONFIGURE the PROCESS</div>
     </div>
-    <div *ngIf="processing" class="content-container header-button-container" fxLayout="row" fxLayoutAlign="center center">
+    <div
+        *ngIf="processing"
+        class="content-container header-button-container"
+        fxLayout="row"
+        fxLayoutAlign="center center"
+    >
         <div fxLayout="row">
             <div>Progress: {{ progress?.completed }} / {{ progress?.total }}</div>
         </div>
@@ -15,7 +25,7 @@
             <prompt-library (selectPromptEmitter)="selectPrompt($event)"></prompt-library>
         </div>
         <div class="content-container full-width" fxLayout="column" fxFlex="50">
-            <h1 class="title">Prompt used in the process:</h1>
+            <div class="title">Prompt used in the process:</div>
             <textarea
                 [(ngModel)]="myAIPrompt"
                 placeholder="Select your AI prompt from library or enter here"
@@ -31,6 +41,8 @@
         </div>
         <div class="content-container full-width" fxLayout="column" fxFlex="50">
             <div *ngIf="files?.length" class="files-list-container" fxLayout="column">
+                <div *ngIf="canProcessFilesWithAi()" (click)="calculateTokensForFiles()" class="btn" fxLayout="row">[ CALCULATE TOKENS and COST ]</div>
+                <hr />
                 <div class="title">Selected files ({{ files.length }}):</div>
                 <div *ngFor="let file of files" class="file-container" fxLayout="row">
                     <div class="info">
@@ -41,6 +53,7 @@
                         </ng-template>
                     </div>
                     <div>{{ file.FullPath }}</div>
+                    <div *ngIf="file.Tokens">&nbsp;({{ file.Tokens }})</div>
                 </div>
             </div>
         </div>

@@ -14,6 +14,7 @@ export class PromptLibraryComponent implements OnInit {
     public projectDirectoryPath: string[] = ['c:', 'project', 'aiworks-prompts'];
     files: IAiFile[] = [];
     selectedFile: IAiFile | null = null;
+    editMode: boolean = false;
 
     constructor(private promptLibraryService: PromptLibraryService) {}
 
@@ -34,6 +35,7 @@ export class PromptLibraryComponent implements OnInit {
 
     onSelectFile(file: IAiFile): void {
         this.selectedFile = file;
+        this.editMode = false;
     }
 
     updateFile(file: IAiFile): void {
@@ -46,6 +48,10 @@ export class PromptLibraryComponent implements OnInit {
         this.promptLibraryService.deleteTxtFile(file).subscribe(() => {
             this.loadFiles();
         });
+    }
+
+    onEditFile() {
+      this.editMode = true;
     }
 
     onSaveFile(): void {

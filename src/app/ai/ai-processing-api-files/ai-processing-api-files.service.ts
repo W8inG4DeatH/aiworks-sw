@@ -8,15 +8,23 @@ import { BACKEND_URL } from 'src/app/constants';
     providedIn: 'root',
 })
 export class AiProcessingApiFilesService {
-    private apiUrl = `${BACKEND_URL}/aimodify`;
+    private apiUrl = `${BACKEND_URL}/aiprocess`;
 
     constructor(private http: HttpClient) {}
 
-    sendForAIModificationFiles(files: IAiFile[], myAIPrompt: string): Observable<any> {
+    sendFilesForAIProcess(files: IAiFile[], myAIPrompt: string): Observable<any> {
         const body = {
             files,
             myAIPrompt,
         };
         return this.http.post(`${this.apiUrl}`, body);
+    }
+
+    sendFilesForAIProcessTokens(files: IAiFile[], myAIPrompt: string): Observable<IAiFile[]> {
+        const body = {
+            files,
+            myAIPrompt,
+        };
+        return this.http.post<IAiFile[]>(`${this.apiUrl}/tokens`, body);
     }
 }

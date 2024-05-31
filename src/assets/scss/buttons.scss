@@ -31,7 +31,6 @@
     outline: none;
 
     &:before {
-        background-color: $white;
         content: '';
         display: flex;
         transform: scale(1, 0);
@@ -63,7 +62,8 @@
     &:hover,
     &:active,
     &:focus {
-        color: $blue-grey;
+        background-color: darkgray;
+        color: $white;
 
         &:before {
             transform: scale(1, 1);
