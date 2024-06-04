@@ -27,13 +27,16 @@
     </div>
     <hr />
     <div *ngIf="files?.length" class="files-list-container" fxLayout="column">
-      <div class="title">Found files ({{ getSelectedFiles().length }}/{{ files.length }}):</div>
+        <div class="title">
+            <input type="checkbox" [(ngModel)]="allFilesSelector" (change)="onAllFilesSelect()" />
+            <span>Found files ({{ getSelectedFiles().length }}/{{ files.length }}): </span>
+        </div>
         <div *ngFor="let file of files" class="file-container" fxLayout="row">
             <input type="checkbox" [(ngModel)]="file.Selected" />
             <div class="truncate-start" title="{{ file.FullPath }}">{{ file.FullPath }}</div>
         </div>
     </div>
-    <hr *ngIf="files?.length">
+    <hr *ngIf="files?.length" />
     <div *ngIf="files?.length">
         <div (click)="selectFiles()" class="full-width" fxLayout="row" fxLayoutAlign="center">
             <div class="btn">[ SELECT FILES ]</div>

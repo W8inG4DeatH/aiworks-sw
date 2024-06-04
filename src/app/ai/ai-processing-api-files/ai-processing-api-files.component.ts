@@ -122,4 +122,8 @@ export class AiProcessingApiFilesComponent implements OnInit {
         }
         this.totalProcessCostInDollars = Math.ceil(totalCost * 100) / 100;
     }
+
+    onSortByTokens() {
+        this.files.sort((a, b) => (b.InputTokens || 1) - (a.InputTokens || 1));
+    }
 }

@@ -12,10 +12,11 @@ export class FileChooserComponent {
     selectFilesEmitter = new EventEmitter<IAiFile[]>();
 
     files: IAiFile[] = [];
+    allFilesSelector: boolean = true;
 
     public projectDirectoryPath: string[] = ['c:', 'sw-api-test', 'src'];
     public fileExtension: string = 'html';
-    public fileFilterStrings: string = 'fxLayout, flex-layout';
+    public fileFilterStrings: string = '';
 
     constructor(private fileChooserService: FileChooserService) {}
 
@@ -38,5 +39,11 @@ export class FileChooserComponent {
 
     selectFiles() {
         this.selectFilesEmitter.emit(this.getSelectedFiles());
+    }
+
+    onAllFilesSelect() {
+        this.files.forEach((file, index) => {
+            file.Selected = this.allFilesSelector;
+        });
     }
 }

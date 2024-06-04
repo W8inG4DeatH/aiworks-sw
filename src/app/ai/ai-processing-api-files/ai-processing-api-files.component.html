@@ -71,7 +71,12 @@
                     [ CALCULATE TOKENS and COST ]
                 </div>
                 <hr *ngIf="canProcessFilesWithAi() && totalProcessCostInDollars === 0" />
-                <div class="title">Selected files ({{ files.length }}):</div>
+                <div fxFlex="row">
+                  <div class="title">Selected files ({{ files.length }}):</div>
+                  <div fxFlex></div>
+                  <div (click)="onSortByTokens()" class="sort-button">[ Sort by Tokens ]</div>
+                </div>
+
                 <div *ngFor="let file of files" class="file-container" fxLayout="row" fxLayoutAlign="start center">
                     <div class="info">
                         <ng-container *ngIf="file.Done; else notDone">&#10003;</ng-container>
