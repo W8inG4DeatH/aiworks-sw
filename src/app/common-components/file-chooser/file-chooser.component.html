@@ -20,9 +20,12 @@
         </div>
     </div>
     <hr />
-    <div>
-        <div (click)="searchFiles()" class="full-width" fxLayout="row" fxLayoutAlign="center">
+    <div class="header-button-container" fxLayout="row" fxLayoutAlign="center center">
+        <div *ngIf="!filesSearching" (click)="searchFiles()" class="full-width" fxLayout="row" fxLayoutAlign="center">
             <div class="btn">[ SEARCH FILES ]</div>
+        </div>
+        <div *ngIf="filesSearching" (click)="searchFiles()" class="full-width bolder" fxLayout="row" fxLayoutAlign="center">
+            Files searching ...
         </div>
     </div>
     <hr />

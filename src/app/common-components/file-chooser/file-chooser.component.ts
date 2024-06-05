@@ -12,11 +12,13 @@ export class FileChooserComponent {
     selectFilesEmitter = new EventEmitter<IAiFile[]>();
 
     files: IAiFile[] = [];
+    filesSearching: boolean = false;
     allFilesSelector: boolean = true;
 
-    public projectDirectoryPath: string[] = ['c:', 'sw-api-test', 'src'];
+    public projectDirectoryPath: string[] = ['c:', 'sw', 'src'];
     public fileExtension: string = 'html';
     public fileFilterStrings: string = '';
+    // public fileFilterStrings: string = 'then, catch, resolve, reject, promise, Promise';
 
     constructor(private fileChooserService: FileChooserService) {}
 
@@ -25,11 +27,13 @@ export class FileChooserComponent {
     }
 
     searchFiles() {
+        this.filesSearching = true;
         const path = this.directoryPath;
         const filters = this.fileFilterStrings.split(',').map((filter) => filter.trim());
 
         this.fileChooserService.searchFiles(path, this.fileExtension, filters).subscribe((files) => {
             this.files = files;
+            this.filesSearching = false;
         });
     }
 

@@ -15,6 +15,7 @@ export class AiProcessingApiFilesComponent implements OnInit {
     files: IAiFile[] = [];
     progress: { completed: number; total: number } | null = null;
     processing: boolean = false;
+    tokensCalculating: boolean = false;
 
     ////////////////////////
     // GPT Data for input //
@@ -31,14 +32,17 @@ export class AiProcessingApiFilesComponent implements OnInit {
 
     async calculateTokensForFiles() {
         if (this.files.length > 0 && this.myAIPrompt) {
+            this.tokensCalculating = true;
             try {
                 const updatedFiles = await this.aiProcessingApiFilesService
                     .sendFilesForAIProcessTokens(this.files, this.myAIPrompt)
                     .toPromise();
                 this.files = updatedFiles ?? this.files;
                 this.calculateTotalCostOfProcess();
+                this.tokensCalculating = false;
             } catch (error) {
                 console.error('Error calculating tokens for files:', error);
+                this.tokensCalculating = false;
             }
         }
     }
