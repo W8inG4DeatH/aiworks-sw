@@ -22,13 +22,17 @@ export class MainMenuComponent implements OnInit {
                 RouterLink: '/dashboard',
             },
             {
-                DisplayName: 'Translation API',
-                RouterLink: '/translation-processing-api-files',
-            },
-            {
                 DisplayName: 'AI API',
                 RouterLink: '/ai-processing-api-files',
             },
-        ];
+            {
+              DisplayName: 'Translation API',
+              RouterLink: '/translation-processing-api-files',
+          },
+          {
+            DisplayName: 'Web Security',
+            RouterLink: '/web-security-testing',
+        },
+  ];
     }
 }

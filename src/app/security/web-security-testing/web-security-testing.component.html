@@ -1,0 +1,40 @@
+<div class="content-container gray" fxLayout="column" fxLayoutAlign="start">
+    <div class="component-container" fxLayout="row" fxLayoutAlign="start center">
+        <div class="target-url subtitle">Target URL:</div>
+        <input
+            type="text"
+            [(ngModel)]="webSecurityTestingService.targetUrl"
+            placeholder="Enter the target URL"
+            fxFlex
+        />
+        <div *ngIf="!testAllProcessing" class="btn test-all-btn" (click)="runTestAll()">Test All</div>
+    </div>
+
+    <div class="component-container info-panel" fxLayout="column">
+        <div *ngIf="!(infoPanel.length > 0)" class="subtitle" fxLayout="row" fxLayoutAlign="center">
+            SELECT SPECIFIC TEST or TEST ALL
+        </div>
+        <div [innerHTML]="infoPanel"></div>
+    </div>
+
+    <div
+        *ngFor="let test of webSecurityTestingService.tests"
+        [ngClass]="{ highlight: test.id === activeTestId }"
+        class="content-container test-container"
+        fxLayout="column"
+        (click)="loadTestDescription(test.id)"
+    >
+        <div class="subtitle">{{ test.name }}</div>
+        <div class="test-item" fxLayout="row" fxLayoutAlign="start center">
+            <input type="text" [(ngModel)]="test.input" [placeholder]="'Enter input to test ' + test.name" fxFlex />
+            <div
+                *ngIf="!test.processing && test.id === activeTestId"
+                class="btn test-btn"
+                (click)="runTest(test.id, test.input)"
+            >
+                Test
+            </div>
+        </div>
+    </div>
+</div>
+

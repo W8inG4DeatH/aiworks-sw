@@ -1,0 +1,36 @@
+.test-container {
+    width: 100%;
+    cursor: pointer;
+
+    .test-item {
+        height: 46px;
+    }
+
+    input {
+        margin-right: 10px;
+    }
+}
+
+.target-url {
+    margin-right: 10px;
+}
+
+.subtitle {
+    font-weight: bolder;
+}
+
+.test-btn,
+.test-all-btn {
+    width: 200px;
+}
+.test-all-btn {
+    margin-left: 10px;
+}
+
+.component-container {
+    margin-bottom: 10px;
+}
+
+.highlight {
+    background-color: antiquewhite;
+}
