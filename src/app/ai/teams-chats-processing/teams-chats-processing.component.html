@@ -1,0 +1,26 @@
+<div fxLayout="row">
+    <div fxFlex="25" class="chats-list">
+        <button (click)="loadChats()">Refresh</button>
+        <ul>
+            <li *ngFor="let chat of chats" (click)="selectChat(chat)">
+                {{ chat.title }}
+            </li>
+        </ul>
+    </div>
+    <div fxFlex="75" class="chat-details">
+        <div *ngIf="selectedChat">
+            <h2>{{ selectedChat.title }}</h2>
+            <button (click)="summarizeChat()">Summarize</button>
+            <button (click)="answerChat()">Answer</button>
+            <div *ngIf="summary">
+                <h3>Summary</h3>
+                <p>{{ summary }}</p>
+            </div>
+            <div *ngIf="answer">
+                <h3>Answer</h3>
+                <p>{{ answer }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+

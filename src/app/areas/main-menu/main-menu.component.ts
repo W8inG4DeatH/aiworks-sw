@@ -26,13 +26,17 @@ export class MainMenuComponent implements OnInit {
                 RouterLink: '/ai-processing-api-files',
             },
             {
-              DisplayName: 'Translation API',
-              RouterLink: '/translation-processing-api-files',
-          },
-          {
-            DisplayName: 'Web Security',
-            RouterLink: '/web-security-testing',
-        },
-  ];
+                DisplayName: 'Teams AI Bot',
+                RouterLink: '/teams-chats-processing',
+            },
+            {
+                DisplayName: 'Translation API',
+                RouterLink: '/translation-processing-api-files',
+            },
+            {
+                DisplayName: 'Web Security',
+                RouterLink: '/web-security-testing',
+            },
+        ];
     }
 }

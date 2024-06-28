@@ -1,0 +1,22 @@
+.chats-list {
+    border-right: 1px solid #ccc;
+    padding: 10px;
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+
+        li {
+            padding: 5px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #f0f0f0;
+            }
+        }
+    }
+}
+
+.chat-details {
+    padding: 10px;
+}
